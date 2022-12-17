@@ -1,5 +1,4 @@
 import cv2
-import time
 import numpy as np
 import mediapipe as mp
 import pickle
@@ -9,9 +8,13 @@ mp_hands = mp.solutions.hands
 
 '''
 To add a new gesture:
-1. Set CURR_GESTURE to the name of the gesture
-2. Press 'g' to capture the gesture, while you're holding the gesture up, repeat however many times you want
-3. Press 'esc' to exit (this will save the gestures to a pickle file)
+1.  Set CURR_GESTURE to the name of the gesture
+2.  Run the script
+3.  Press 'g' to capture the gesture, while you're holding the gesture up, repeat however many times you want
+4.  Press 'esc' to save and exit. If there already exists a dataset for your label, the newly captured
+    gestures will be added to it. Otherwise, a new entry will be made for the new dataset. (this will save the gestures to a pickle file)
+5.  Repeat steps 1-4 for each gesture you want to add
+6.  Try making each gesture and see if it is recognized correctly
 
 You can also delete saved_gestures.pickle to reset the saved gestures
 '''
@@ -120,7 +123,7 @@ def main():
                     GESTURES[CURR_GESTURE].append(landmarks)
                 else:
                     GESTURES[CURR_GESTURE] = [landmarks]
-                print("Gesture captured")
+                print(f"Gesture captured: {CURR_GESTURE}")
     cap.release()
 
 if __name__ == "__main__":
